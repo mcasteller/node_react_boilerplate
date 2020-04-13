@@ -2,10 +2,10 @@
 FROM node:10.13.0-alpine
 
 # Create the working dir
-RUN mkdir -p /opt/app/trendauto-app
-WORKDIR /opt/app/trendauto-app
+RUN mkdir -p /opt/app/myproject-app
+WORKDIR /opt/app/myproject-app
 
-COPY package.json yarn.lock /opt/app/trendauto-app/
+COPY package.json yarn.lock /opt/app/myproject-app/
 
 # Install the node modules that the project needs
 RUN yarn install

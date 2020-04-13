@@ -2,22 +2,22 @@ version: "3"
 
 services:
   app:
-    container_name: trendauto_app
+    container_name: myproject_app
     build: ./app
     ports:
       - "3100:3100"
     volumes:
-      - ./app/src:/opt/app/trendauto-app/src
+      - ./app/src:/opt/app/myproject-app/src
     command: yarn start 
 
   client:
-    container_name: trendauto_client
+    container_name: myproject_client
     build: ./client
     ports:
       - "3000:3000"
     volumes:
-      - ./client/src:/opt/app/trendauto-client/src
-      - ./client/public:/opt/app/trendauto-client/public
+      - ./client/src:/opt/app/myproject-client/src
+      - ./client/public:/opt/app/myproject-client/public
     links:
       - app
     command: yarn start

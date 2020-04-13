@@ -9,7 +9,10 @@ This is a project to test some features like:
 ## Use
 Project is executed using this command:
 
-docker-compose up --build
+$ docker-compose up --build
+or
+$ docker-compose -f ./docker-compose.yml up --build
+
 
 ## Set up Express and React
 https://medium.com/@ABiasedHypocrite/simplest-and-fastest-react-express-app-setup-8497ed8db0d1
