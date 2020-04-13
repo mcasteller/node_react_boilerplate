@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function App () {
 
-  useEffect(() => {
-    const data = fetch('/users')
-      .then(response => response.text())
-      .then(data => console.log({data}))
-      .catch((e) => console.log("Error", e));
-    console.log('data', data);
-  })
+  useEffect( () => {
+    const data = fetch( '/users' )
+      .then( response => response.text() )
+      .then( data => console.log( { data } ) )
+      .catch( ( e ) => console.log( "Error", e ) );
+    console.log( 'data', data );
+  } )
   return (
     <div className="App">
       <header className="App-header">
