@@ -1,0 +1,8 @@
+{
+  "name": "trendauto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "mariano casteller",
+  "license": "MIT",
+  "dependencies": {}
+}
