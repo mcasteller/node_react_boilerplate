@@ -7,7 +7,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - ./app/src:/opt/app/myproject-app/src
+      - ./app:/opt/app/myproject-app
     command: yarn start 
 
   client:

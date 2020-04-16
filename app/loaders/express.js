@@ -2,8 +2,8 @@ const express = require( 'express' );
 const createError = require( 'http-errors' );
 const path = require( 'path' );
 const cookieParser = require( 'cookie-parser' );
-const logger = require ( 'morgan' );
-
+const morgan = require( 'morgan' );
+const logger = require( './logger' );
 const indexRouter = require( '../modules/core/core.routes' );
 const usersRouter = require( '../modules/users/users.routes' );
 
@@ -11,7 +11,7 @@ const usersRouter = require( '../modules/users/users.routes' );
  * Initialize application middleware
  */
 module.exports.initMiddleware = function ( app ) {
-  app.use( logger( 'dev' ) );
+  app.use( morgan( logger.getLogFormat(), logger.getMorganOptions() ) );
   app.use( express.json() );
   app.use( express.urlencoded( { extended: false } ) );
   app.use( cookieParser() );
@@ -22,7 +22,7 @@ module.exports.initMiddleware = function ( app ) {
  * Configure view engine
  */
 module.exports.initViewEngine = function ( app ) {
-  app.set( 'views', path.join( __dirname, 'views' ) );
+  app.set( 'views', path.join( __dirname, '../views' ) );
   app.set( 'view engine', 'jade' );
 }
 
