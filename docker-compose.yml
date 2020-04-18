@@ -6,8 +6,9 @@ services:
     build: ./app
     ports:
       - "3100:3100"
+      - "9229:9229"
     volumes:
-      - ./app:/opt/app/myproject-app
+      - ./app:/opt/app/myproject-app/app
     command: yarn start 
 
   client:

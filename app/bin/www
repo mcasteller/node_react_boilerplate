@@ -12,7 +12,7 @@ if ( process.env.NODE_ENV !== 'production' ) {
  * Module dependencies.
  */
 
-const app = require( '../loaders/app' );
+const app = require( '../lib/index' );
 const debug = require( 'debug' )( 'api:server' );
 const http = require( 'http' );
 

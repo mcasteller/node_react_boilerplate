@@ -43,3 +43,22 @@ https://medium.com/@xiaolishen/develop-in-docker-a-node-backend-and-a-react-fron
 
 ## Logging
 https://www.digitalocean.com/community/tutorials/how-to-use-winston-to-log-node-js-applications
+
+## VSC Debug configuration
+You may want to add this configuration into VSC to debug server code:
+
+```` javascript
+  {
+    "name": "Docker: My Project",
+    "type": "node",
+    "request": "attach",
+    "port": 9229,
+    "address": "localhost",
+    "protocol": "inspector",
+    "restart": false,
+    "sourceMaps": false,
+    "outFiles": [],
+    "localRoot": "${workspaceFolder}/app",
+    "remoteRoot": "/opt/app/myproject-app"
+  }
+````

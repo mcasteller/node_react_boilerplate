@@ -1,6 +1,9 @@
 # Tell Docker we want to use Node v10.4.1 installed in a alpine Linux image
 FROM node:10.13.0-alpine
 
+# --debug and inspect port
+EXPOSE 5858 9229
+
 # Create the working dir
 RUN mkdir -p /opt/app/myproject-client
 WORKDIR /opt/app/myproject-client

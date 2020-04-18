@@ -1,4 +1,5 @@
 'use strict';
+const path = require( 'path' );
 
 module.exports = {
 
@@ -27,7 +28,7 @@ module.exports = {
       file: {
         level: 'info',
         colorize: false,
-        filename: './logs/all-logs.log',
+        filename: path.join( process.cwd(), 'logs/all-logs.log' ),
         timestamp: true,
         maxsize: 5242880, //5MB
         maxFiles: 2,
