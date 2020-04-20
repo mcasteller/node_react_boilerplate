@@ -8,8 +8,7 @@ services:
       - "3100:3100"
       - "9229:9229"
     volumes:
-      - ./app:/opt/app/myproject-app/app
-    command: yarn start 
+      - ./app:/opt/app/
 
   client:
     container_name: myproject_client
@@ -21,5 +20,4 @@ services:
       - ./client/public:/opt/app/myproject-client/public
     links:
       - app
-    command: yarn start
     tty: true

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --inspect=0.0.0.0:9229 ./bin/www"
+    "start": "node ./bin/www",
+    "start-dev": "gulp nodemon"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -7,8 +7,7 @@ module.exports = ( app ) => {
 
   /* GET users listing. */
   router.get( '/', function ( req, res, next ) {
-    logger.info( 'heilaa logger' );
-    console.log( 'heilaa' )
-    res.send( 'respond with a resource' );
+    logger.info( 'User Route executed' );
+    res.send( 'respond with a resources - marianoooooooo' );
   } );
 }

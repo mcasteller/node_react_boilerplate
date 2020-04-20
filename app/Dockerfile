@@ -5,10 +5,10 @@ FROM node:10.13.0-alpine
 EXPOSE 5858 9229
 
 # Create the working dir
-RUN mkdir -p /opt/app/myproject-app
-WORKDIR /opt/app/myproject-app
+RUN mkdir -p /opt/app/
+WORKDIR /opt/app/
 
-COPY package.json yarn.lock /opt/app/myproject-app/
+COPY package.json yarn.lock /opt/app/
 
 # Install the node modules that the project needs
 RUN yarn install
@@ -16,4 +16,4 @@ RUN yarn install
 COPY . .
 
 # Now our app lives in the container, we can run the command npm start
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "start-dev" ]
