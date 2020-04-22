@@ -1,34 +1,31 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
 
-function App () {
+import history from './history';
 
-  useEffect( () => {
-    const data = fetch( '/users' )
-      .then( response => response.text() )
-      .then( data => console.log( { data } ) )
-      .catch( ( e ) => console.log( "Error", e ) );
-    console.log( 'data', data );
-  } )
+// import App from './containers/App/App';
+
+// import EnsureAuthenticatedUser from './containers/EnsureAuthenticatedUser/EnsureAuthenticatedUser';
+
+import Home from './views/Home/Home';
+import Page from './layouts/Page/Page';
+import Person from './views/Person/Person';
+
+//const env = process.env.NODE_ENV || 'development';
+
+export default function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router history={history}>
+      <Page>
+        <Switch>
+          <Route path="/" component={Home} exact/>
+          {/* <EnsureAuthenticatedUser> */}
+          <Switch>
+            <Route path="/profile" component={Person} />
+          </Switch>
+          {/* </EnsureAuthenticatedUser> */}
+        </Switch>
+      </Page>
+    </Router>
+  )
 }
-
-export default App;
