@@ -3,29 +3,30 @@ import { Router, Route, Switch } from 'react-router-dom';
 
 import history from './history';
 
-// import App from './containers/App/App';
-
 // import EnsureAuthenticatedUser from './containers/EnsureAuthenticatedUser/EnsureAuthenticatedUser';
 
 import Home from './views/Home/Home';
 import Page from './layouts/Page/Page';
 import Person from './views/Person/Person';
+import { AppProvider } from './context/AppProvider/store';
 
 //const env = process.env.NODE_ENV || 'development';
 
 export default function App () {
   return (
     <Router history={history}>
-      <Page>
-        <Switch>
-          <Route path="/" component={Home} exact/>
-          {/* <EnsureAuthenticatedUser> */}
+      <AppProvider>
+        <Page>
           <Switch>
-            <Route path="/profile" component={Person} />
+            <Route path="/" component={Home} exact/>
+            {/* <EnsureAuthenticatedUser> */}
+            <Switch>
+              <Route path="/profile" component={Person} />
+            </Switch>
+            {/* </EnsureAuthenticatedUser> */}
           </Switch>
-          {/* </EnsureAuthenticatedUser> */}
-        </Switch>
-      </Page>
+        </Page>
+      </AppProvider>
     </Router>
   )
 }

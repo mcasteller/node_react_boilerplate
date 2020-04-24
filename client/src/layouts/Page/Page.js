@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -14,5 +15,7 @@ export default function Page ( props ) {
   );
 }
 
-Page.propTypes = { children: true };
+Page.propTypes = {
+  children: PropTypes.element.isRequired
+}
 

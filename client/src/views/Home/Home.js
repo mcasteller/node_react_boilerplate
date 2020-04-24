@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 import { Button, Grid, Typography, Container, Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
 import StarIcon from '@material-ui/icons/StarBorder';
 import { makeStyles } from '@material-ui/core/styles';
+import { Context } from '../../context/AppProvider/store';
 
 function Home () {
+
+  const [ state, actions ] = useContext( Context );
 
   const useStyles = makeStyles( ( theme ) => ( {
     '@global': {
@@ -93,7 +96,9 @@ function Home () {
     //   .then( data => console.log( { data } ) )
     //   .catch( ( e ) => console.log( "Error", e ) );
     // console.log( 'data', data );
-  } )
+    actions.getMessage();
+    // console.log( actions );
+  }, [ state.message ] )
 
   const classes = useStyles();
 
@@ -101,7 +106,7 @@ function Home () {
     <React.Fragment>
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Pricing
+          Pricing {state.message ? state.message : false}
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" component="p">
           Quickly build an effective pricing table for your potential customers with this layout.
