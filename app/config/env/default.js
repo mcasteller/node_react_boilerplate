@@ -1,9 +1,20 @@
+/* eslint-disable max-len */
+
 'use strict';
 const path = require( 'path' );
 
 module.exports = {
 
-  // logger
+  db: {
+    host: 'mongo',
+    port: 27017,
+    options: {},
+    debug: false,
+    // faster - don't perform 2nd request to verify
+    // log message was received/saved
+    safe: false,
+    dbname: 'expressmongo'
+  },
   logger: {
     // logging with Morgan - https://github.com/expressjs/morgan
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
@@ -40,6 +51,26 @@ module.exports = {
         humanReadableUnhandledException: true
       }
     }
+  },
+  session: {
+    secret: 'myproject',
+    cookie: {
+      // session expiration is set by default to 24 hours
+      maxAge: 24 * ( 60 * 60 * 1000 ),
+      // httpOnly flag makes sure the cookie is only accessed
+      // through the HTTP protocol and not JS/browser
+      httpOnly: true,
+      // secure cookie should be turned to true to provide additional
+      // layer of security so that the cookie is set only when working
+      // in HTTPS mode.
+      secure: false
+    },
+    resave: false,
+    saveUninitialized: true
+  },
+  google: {
+    clientID: process.env.GOOGLE_AUTH_CLIENT_ID || '261404288404-556hbrioma1usbcphns9ktm1lgpppq2f.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET
   }
 
 };

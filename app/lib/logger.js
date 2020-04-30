@@ -3,13 +3,14 @@ const winston = require( 'winston' );
 const fs = require( 'fs' );
 const _ = require( 'lodash' );
 const morgan = require( 'morgan' );
+const Container = require( "typedi" ).Container;
 
 const config = require( '../config/config' );
 
 /**
 * Initialize winston logger
 */
-module.exports = function ( app ) {
+module.exports.initialize = function ( app ) {
 
   const logger = new winston.createLogger( {
     transports: _createTransports(),
@@ -58,7 +59,9 @@ module.exports = function ( app ) {
 
   app.use( morgan( logger.getLogFormat(), logger.getMorganOptions() ) );
 
-  module.exports.logger = logger;
+  Container.set( "logger", logger );
+
+  logger.info( "Logger set up completed" )
 }
 
 function _createTransports () {

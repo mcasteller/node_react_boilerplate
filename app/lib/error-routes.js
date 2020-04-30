@@ -1,9 +1,12 @@
 const createError = require( 'http-errors' );
-const { logger } = require( './logger' );
+const Container = require( "typedi" ).Container;
+
 /**
  * Configure error handling
  */
-module.exports = function ( app ) {
+module.exports.initialize = function ( app ) {
+  const logger  = Container.get( "logger" );
+
   // catch 404 and forward to error handler
   app.use( function ( req, res, next ) {
     next( createError( 404 ) );
@@ -22,6 +25,6 @@ module.exports = function ( app ) {
 
     // render the error page
     res.status( err.status || 500 );
-    res.render( 'error' );
+    res.json( { error: err } );
   } );
 }
