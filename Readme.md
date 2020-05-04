@@ -8,7 +8,11 @@ This is just a boilerplate project to feature some Node and React related techno
 - Node/Express
 - Mongoose
 - Logging (winston/morgan)
-- React
+- JWT authentication using Passport.JS
+- Sentry
+- React (React Context to deal with state management)
+- Material UI
+- Jest + Enzyme
 
 ## Summary
 
