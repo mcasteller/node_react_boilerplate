@@ -1,4 +1,5 @@
 const async = require( 'async' );
+const Sentry = require ( '@sentry/node' );
 const logger = require( './logger' );
 const mongoose = require( './mongoose' );
 const middleware = require( './middleware' );
@@ -71,6 +72,10 @@ module.exports.initialize = ( app ) => {
   }
 
   async function initErrorRoutes () {
+    // The error handler must be before any other error middleware
+    // and after all controllers
+    app.use( Sentry.Handlers.errorHandler() );
+
     errorRoutes.initialize( app );
   }
 }

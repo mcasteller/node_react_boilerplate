@@ -16,16 +16,6 @@ function AuthenticatedContent ( props ) {
     }
   }, [] );
 
-  // if ( !user ) {
-  //   return (
-
-  //     <div span={6}>
-  //       <h3>Unauthorized</h3>
-  //       <p>Sorry, you have to be logged in to get access to the page.</p>
-  //     </div>
-  //   );
-  // }
-
   if ( user ) {
     return props.children || null;
   }

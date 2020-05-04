@@ -91,14 +91,8 @@ function Home () {
   const [ state, actions ] = useContext( Context );
 
   useEffect( () => {
-    // const data = fetch( '/users' )
-    //   .then( response => response.text() )
-    //   .then( data => console.log( { data } ) )
-    //   .catch( ( e ) => console.log( "Error", e ) );
-    // console.log( 'data', data );
     actions.getMessage();
-    // console.log( actions );
-  }, [ state.message ] )
+  }, [] )
 
   const classes = useStyles();
 

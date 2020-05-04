@@ -18,18 +18,18 @@ export default function LoginButton () {
 
   return user ? (
     <GoogleLogout
-      clientId="261404288404-556hbrioma1usbcphns9ktm1lgpppq2f.apps.googleusercontent.com"
+      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
       buttonText="Logout"
       onLogoutSuccess={logout}
       onFailure={logoutFailure}
     />
   ) : (
     <GoogleLogin
-      clientId="261404288404-556hbrioma1usbcphns9ktm1lgpppq2f.apps.googleusercontent.com"
+      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
       buttonText="Login"
       cookiePolicy={'single_host_origin'}
       uxMode='redirect'
-      redirectUri={'http://localhost:3100/api/users/auth/google/callback'}
+      redirectUri={process.env.REACT_APP_GOOGLE_REDIRECT_URL}
       state={window.location.pathname}
     />
   )
