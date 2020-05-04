@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { createActions } from './actions';
 
 const initialState = {
-  user: ''
+  user: _loadUserData()
 };
 
 const Context = createContext( initialState );
@@ -28,4 +28,16 @@ export { Context, AppProvider }
 
 AppProvider.propTypes = {
   children: PropTypes.element.isRequired
+}
+
+function _loadUserData () {
+  try {
+    const serializedState = localStorage.getItem( 'user' );
+    if ( serializedState === null ) {
+      return undefined;
+    }
+    return JSON.parse( serializedState );
+  } catch ( err ) {
+    return undefined;
+  }
 }

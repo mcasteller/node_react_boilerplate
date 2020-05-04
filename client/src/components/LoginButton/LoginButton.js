@@ -1,37 +1,36 @@
 import React, { useContext } from 'react';
-import GoogleLogin from 'react-google-login';
-import { Context } from '../../context/HeaderProvider/store';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+
+import { Context } from '../../context/AppProvider/store';
 
 export default function LoginButton () {
 
   const [ state, actions ] = useContext( Context );
 
-  const successResponseGoogle = ( response ) => {
-    // const { tokenId } = response;
-
-    actions.login( {
-      response
-    } )
+  const logout = ( response ) => {
+    actions.logout();
   }
 
-  const failureResponseGoogle = ( response ) => {
+  const logoutFailure = ( response ) => {
     console.log( response );
   }
-  const user = 'mariano';
+  const user = state.user;
 
   return user ? (
-    // <a href="http://localhost:3100/users/auth/google">Che dale al login</a>
+    <GoogleLogout
+      clientId="261404288404-556hbrioma1usbcphns9ktm1lgpppq2f.apps.googleusercontent.com"
+      buttonText="Logout"
+      onLogoutSuccess={logout}
+      onFailure={logoutFailure}
+    />
+  ) : (
     <GoogleLogin
       clientId="261404288404-556hbrioma1usbcphns9ktm1lgpppq2f.apps.googleusercontent.com"
       buttonText="Login"
-      onSuccess={successResponseGoogle}
-      onFailure={failureResponseGoogle}
       cookiePolicy={'single_host_origin'}
       uxMode='redirect'
-      redirectUri={'http://localhost:3100/users/auth/google/callback'}
+      redirectUri={'http://localhost:3100/api/users/auth/google/callback'}
+      state={window.location.pathname}
     />
-  ) : (
-    <a>Logout</a>
   )
-
 }
