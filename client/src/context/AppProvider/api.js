@@ -1,10 +1,4 @@
 
-export function getMessage () {
-  return fetch( '/api/users', { method: 'GET' } )
-    .then( _handleErrors )
-    .then( response => response.json() )
-}
-
 export function getUserProfile () {
   return fetch( '/api/users/profile', { method: 'GET' } )
     .then( _handleErrors )

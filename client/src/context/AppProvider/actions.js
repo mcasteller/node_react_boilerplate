@@ -14,14 +14,6 @@ export const constants = {
 // to be later used by reducers to update current state
 export function createActions ( dispatch ) {
   return {
-    getMessage: async () => {
-      const payload = await api.getMessage();
-
-      dispatch( {
-        type: constants.GET_MESSAGE_SUCCESS,
-        payload
-      } );
-    },
     getUserProfile: async () => {
       try {
         const user = await api.getUserProfile();
