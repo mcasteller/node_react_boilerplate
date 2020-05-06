@@ -85,7 +85,7 @@ Here are some guides I based project structure on:
 - https://blog.risingstack.com/node-hero-node-js-project-structure-tutorial/
 
 ### React Client
-Client project structure was based on create-react-app project, what is interesting to show is how we deal with React asynchronous operations, using React Context tool:
+Client project structure was based on create-react-app project, what is interesting to show is how we deal with React asynchronous operations, using React Context tool. The idea is to have multiple providers to deal with state management.
 
 ```
 .

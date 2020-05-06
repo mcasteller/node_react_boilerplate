@@ -6,7 +6,9 @@ export const constants = {
   GET_USER_PROFILE_SUCCESS: 'GET_USER_PROFILE_SUCCESS',
   GET_USER_PROFILE_FAILURE: 'GET_USER_PROFILE_FAILURE',
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
-  LOGOUT_FAILURE: 'LOGOUT_FAILURE'
+  LOGOUT_FAILURE: 'LOGOUT_FAILURE',
+  ALERT: 'ALERT',
+  CLEAR_ALERT: 'CLEAR_ALERT'
 
 };
 
@@ -33,13 +35,18 @@ export function createActions ( dispatch ) {
     },
     logout: async () => {
       try {
-        const response = await api.logout();
+        // TODO: logout with Redis feature
+        // const response = await api.logout();
+        const response = { message: 'User successfully loged out!' }
 
         localStorage.removeItem( "user" );
 
         dispatch( {
           type: constants.LOGOUT_SUCCESS,
-          message: response.message
+          alert: {
+            message: response.message,
+            severity: 'success'
+          }
         } );
       } catch ( e ) {
         dispatch( {
@@ -47,6 +54,20 @@ export function createActions ( dispatch ) {
           errorMessage: e.message || e
         } );
       }
+    },
+    alert: ( { message, severity } ) => {
+      dispatch( {
+        type: constants.ALERT,
+        alert: {
+          message,
+          severity
+        }
+      } );
+    },
+    clearAlert: () => {
+      dispatch( {
+        type: constants.CLEAR_ALERT
+      } );
     }
   }
 }

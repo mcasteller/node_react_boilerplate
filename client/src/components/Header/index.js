@@ -5,8 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import LoginButton from '../LoginButton/index';
 import { HeaderProvider } from '../../context/HeaderProvider/store';
+import ProfileMenu from '../ProfileMenu/index';
 
 const useStyles = makeStyles( ( theme ) => ( {
   menuButton: {
@@ -30,7 +30,7 @@ export default function Header () {
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
-          <LoginButton />
+          <ProfileMenu />
         </Toolbar>
       </AppBar>
     </HeaderProvider>

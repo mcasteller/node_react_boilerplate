@@ -9,9 +9,13 @@ const reducer = ( state, action ) => {
   case constants.GET_USER_PROFILE_FAILURE:
     return { ...state, error: action.errorMessage }
   case constants.LOGOUT_SUCCESS:
-    return { ...state, user: {} }
+    return { ...state, user: {}, alert: action.alert }
   case constants.LOGOUT_FAILURE:
     return { ...state, user: {}, error: action.errorMessage }
+  case constants.ALERT:
+    return { ...state, alert: action.alert }
+  case constants.CLEAR_ALERT:
+    return { ...state, alert: undefined }
   default:
     throw new Error();
   }

@@ -7,8 +7,19 @@ const controller = require( './users.controller' );
 module.exports = ( app ) => {
   const logger = Container.get( "logger" );
 
+  // GET /auth/google
+  //   Use passport.authenticate() as route middleware to authenticate the
+  //   request.  The first step in Google authentication will involve redirecting
+  //   the user to google.com.  After authorization, Google will redirect the user
+  //   back to this application at /auth/google/callback
+  app.use( '/auth/google',
+    passport.authenticate( 'google', { scope: [ 'profile', 'email' ] } ) );
+
   app.use( '/api/users', router );
 
+  // GET /auth/google/callback
+  //   Use passport.authenticate() as route middleware to authenticate the
+  //   request.
   router.get( '/auth/google/callback',
     passport.authenticate( 'google', { scope: [ 'profile', 'email' ] } ),
     controller.authenticate );
