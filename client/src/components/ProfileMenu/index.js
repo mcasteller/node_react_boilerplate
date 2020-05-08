@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import _ from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AppsIcon from '@material-ui/icons/Apps';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -151,15 +152,14 @@ export default function ProfileMenu () {
 
   return (
     <div>
-      <Button
+      <IconButton
         aria-controls="customized-menu"
         aria-haspopup="true"
-        variant="contained"
-        color="primary"
+        color="inherit"
         onClick={handleClick}
       >
-        Open Menu
-      </Button>
+        <AppsIcon />
+      </IconButton>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}

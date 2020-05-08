@@ -1,4 +1,5 @@
 import * as api from './api';
+import history from '../../history';
 
 // Constants
 export const constants = {
@@ -38,6 +39,8 @@ export function createActions ( dispatch ) {
         // TODO: logout with Redis feature
         // const response = await api.logout();
         const response = { message: 'User successfully loged out!' }
+
+        history.push( '/' );
 
         localStorage.removeItem( "user" );
 

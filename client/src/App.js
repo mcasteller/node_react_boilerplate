@@ -20,7 +20,8 @@ export default function App () {
             <Route path="/" component={Home} exact/>
             <AuthenticatedContent>
               <Switch>
-                <Route path="/profile" component={Person} />
+                <Route path="/settings/account" component={Person} />
+                <Route path="/dashboard" component={Person} />
               </Switch>
             </AuthenticatedContent>
           </Switch>
