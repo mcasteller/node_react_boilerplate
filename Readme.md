@@ -14,6 +14,10 @@ This is just a boilerplate project to feature some Node and React related techno
 - Material UI
 - Jest + Enzyme
 
+## Screen capture
+![application main view screenshot](https://user-images.githubusercontent.com/5411855/81440346-86422f00-9135-11ea-8f15-474f80891db0.png)
+
+
 ## Summary
 
 - [Run](#run)
