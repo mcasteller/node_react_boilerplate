@@ -1,11 +1,10 @@
 const { Router } = require( 'express' );
 const router = Router();
-const Container = require( "typedi" ).Container;
 const passport = require ( 'passport' );
 const controller = require( './users.controller' );
+const { logger } = require( '../../lib/logger' );
 
 module.exports = ( app ) => {
-  const logger = Container.get( "logger" );
 
   // GET /auth/google
   //   Use passport.authenticate() as route middleware to authenticate the

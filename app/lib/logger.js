@@ -2,67 +2,58 @@
 const winston = require( 'winston' );
 const fs = require( 'fs' );
 const _ = require( 'lodash' );
-const morgan = require( 'morgan' );
-const Container = require( "typedi" ).Container;
 
 const config = require( '../config/config' );
 
 /**
 * Initialize winston logger
 */
-module.exports.initialize = function ( app ) {
+const logger = new winston.createLogger( {
+  transports: _createTransports(),
+  exitOnError: false
+} )
 
-  const logger = new winston.createLogger( {
-    transports: _createTransports(),
-    exitOnError: false
-  } )
+// Define a stream function that will be able to
+// get morgan-generated output into the winston log files
+logger.stream = {
+  write: function ( message ){
+    logger.info( message );
+  }
+};
 
-  // Define a stream function that will be able to
-  // get morgan-generated output into the winston log files
-  logger.stream = {
-    write: function ( message ){
-      logger.info( message );
-    }
-  };
-
-  /**
+/**
  * The options to use with morgan logger
  *
  * Returns a log.options object with a writable stream based on winston
  * file logging transport (if available)
  */
-  logger.getMorganOptions = function getMorganOptions () {
-    return {
-      stream: logger.stream
-    };
+logger.getMorganOptions = function getMorganOptions () {
+  return {
+    stream: logger.stream
   };
+};
 
-  /**
+/**
  * The format to use with the logger
  *
  * Returns the log.format option set in the current environment configuration
  */
-  logger.getLogFormat = function getLogFormat () {
-    let format = config.log
+logger.getLogFormat = function getLogFormat () {
+  let format = config.log
     && config.log.format ? config.log.format.toString() : 'combined';
 
-    // list of valid formats for the logging
-    const validFormats = [ 'combined', 'common', 'dev', 'short', 'tiny' ];
+  // list of valid formats for the logging
+  const validFormats = [ 'combined', 'common', 'dev', 'short', 'tiny' ];
 
-    // make sure we have a valid format
-    if ( !_.includes( validFormats, format ) ) {
-      format = 'combined';
-    }
+  // make sure we have a valid format
+  if ( !_.includes( validFormats, format ) ) {
+    format = 'combined';
+  }
 
-    return format;
-  };
+  return format;
+};
 
-  app.use( morgan( logger.getLogFormat(), logger.getMorganOptions() ) );
-
-  Container.set( "logger", logger );
-
-  logger.info( "Logger set up completed" )
-}
+logger.info( "Logger set up completed" )
 
 function _createTransports () {
   const transports = [];
@@ -100,3 +91,5 @@ function _createTransports () {
   }
   return transports;
 }
+
+module.exports = { logger }

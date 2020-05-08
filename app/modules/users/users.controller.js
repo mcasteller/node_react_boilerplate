@@ -1,8 +1,7 @@
-const Container = require( "typedi" ).Container;
 const jwt = require( 'jsonwebtoken' )
+const { logger } = require( '../../lib/logger' );
 
 module.exports.authenticate = ( req, res, next ) => {
-  const logger = Container.get( "logger" );
 
   logger.info( 'User Route: authentication successfull' );
 
@@ -10,7 +9,9 @@ module.exports.authenticate = ( req, res, next ) => {
     name: req.user.username,
     email: req.user.email,
     displayName: req.user.displayName,
-    provider: req.user.provider }
+    provider: req.user.provider,
+    roles: req.user.roles
+  }
 
   // TODO: retrieve secret from config file
   const token = jwt.sign( {
@@ -23,21 +24,21 @@ module.exports.authenticate = ( req, res, next ) => {
 }
 
 module.exports.getUser = ( req, res, next ) => {
-  const logger = Container.get( "logger" );
 
   const user = {
     name: req.user.username,
     email: req.user.email,
     displayName: req.user.displayName,
-    provider: req.user.provider }
+    provider: req.user.provider,
+    roles: req.user.roles
+  }
 
-  logger.info( `User Route: authentication successfull for user: ${ user }` );
+  logger.info( `User Route: authentication successfull for user: ${ JSON.stringify( user ) }` );
 
   res.json( user )
 }
 
 module.exports.logout = ( req, res, next ) => {
-  const logger = Container.get( "logger" );
 
   const user = {
     name: req.user.username,

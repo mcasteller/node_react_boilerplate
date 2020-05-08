@@ -1,6 +1,6 @@
 const JwtStrategy = require( 'passport-jwt' ).Strategy
 const mongoose = require( 'mongoose' );
-const Container = require( "typedi" ).Container;
+const { logger } = require ( '../logger' );
 
 const strategy = () => {
 
@@ -19,7 +19,6 @@ const strategy = () => {
   // opts.audience = 'yoursite.net';
 
   return new JwtStrategy( opts, function ( jwt_payload, done ) {
-    const logger  = Container.get( "logger" );
     const User = mongoose.model( 'User' );
 
     const { email } = jwt_payload.data;

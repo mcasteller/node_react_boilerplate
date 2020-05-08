@@ -1,16 +1,15 @@
 const passport = require( 'passport' );
 const session = require( 'express-session' );
-const Container = require( "typedi" ).Container;
+
 const googleStrategy = require ( './auth-strategies/google' );
 const jwtStrategy = require ( './auth-strategies/jwt' );
-
 const config = require( '../config/config' );
+const { logger } = require( './logger' );
 
 /**
  * Initialize passport.js
  */
 module.exports.initialize = function ( app ) {
-  const logger  = Container.get( "logger" );
 
   logger.info( 'Session: initialize' );
 
@@ -34,7 +33,5 @@ module.exports.initialize = function ( app ) {
   passport.use( 'jwt', jwtStrategy );
 
   passport.use( 'google', googleStrategy )
-
-  Container.set( 'passport', passport );
 }
 

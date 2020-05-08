@@ -1,14 +1,14 @@
 const async = require( 'async' );
 const Sentry = require ( '@sentry/node' );
-const logger = require( './logger' );
+const morgan = require( 'morgan' );
+
+const { logger } = require( './logger' );
 const mongoose = require( './mongoose' );
 const middleware = require( './middleware' );
 const session = require( './session' );
 const routes = require( './routes' );
 const security = require( './security' );
 const errorRoutes = require( './error-routes.js' );
-const models = require( '../modules/models' );
-const Container = require( "typedi" ).Container;
 
 /**
  * Initialize the Express application
@@ -16,7 +16,6 @@ const Container = require( "typedi" ).Container;
 
 module.exports.initialize = ( app ) => {
 
-  console.log( 'Start app init' )
   async.series( [
     initLogger,
     initDatabase,
@@ -34,25 +33,11 @@ module.exports.initialize = ( app ) => {
   } );
 
   async function initLogger () {
-    logger.initialize( app )
+    app.use( morgan( logger.getLogFormat(), logger.getMorganOptions() ) );
   }
 
   async function initDatabase () {
-    const logger  = Container.get( "logger" );
-
-    return mongoose.connect()
-      .then( function ( connection ) {
-      // Enabling mongoose debug mode if required
-      // mongoose.set( 'debug', config.db.debug );
-        logger.info( 'Mongo: connected' );
-
-        return models.load();
-      // Call callback FN
-      // if ( callback ) callback( connection.db );
-      } )
-      .catch( function ( err ) {
-        logger.error( 'Could not connect to MongoDB!' );
-      } )
+    return mongoose.initDatabase()
   }
 
   async function initMiddleware () {
