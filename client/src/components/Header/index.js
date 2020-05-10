@@ -7,7 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 
 import Typography from '@material-ui/core/Typography';
@@ -15,6 +15,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
 
 import { HeaderProvider } from '../../context/HeaderProvider/store';
 import ProfileMenu from '../ProfileMenu/index';
@@ -55,6 +58,9 @@ const useStyles = makeStyles( ( theme ) => ( {
     } ),
     width: '0'
   },
+  nested: {
+    paddingLeft: theme.spacing( 4 )
+  },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
@@ -74,6 +80,11 @@ export default function Header () {
   const classes = useStyles();
 
   const [ open, setOpen ] = useState( true )
+  const [ subMenuOpen, setSubmenuOpen ] = useState( false )
+
+  function handleClick () {
+    setSubmenuOpen( !subMenuOpen )
+  }
 
   function toggleMenu () {
     setOpen( !open )
@@ -123,6 +134,24 @@ export default function Header () {
               <ListItemText primary={text} />
             </ListItem>
           ) )}
+          <ListItem button onClick={handleClick}>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Inbox" />
+            {subMenuOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={subMenuOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Starred" />
+              </ListItem>
+            </List>
+          </Collapse>
+
         </List>
       </Drawer>
     </HeaderProvider>
