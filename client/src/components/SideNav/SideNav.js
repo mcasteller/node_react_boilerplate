@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Context } from '../../context/AppProvider/store';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import CollapseMenuItem from '../CollapseMenuItem/CollapseMenuItem';
 
 export default function SideNav ( props ) {
 
+  // Styles
   const drawerWidth = 240;
 
   const useStyles = makeStyles( ( theme ) => ( {
@@ -74,11 +71,45 @@ export default function SideNav ( props ) {
 
   const classes = useStyles();
 
-  const [ subMenuOpen, setSubmenuOpen ] = useState( false )
+  // Hooks
+  const [ state, actions ] = useContext( Context );
 
-  function handleClick () {
-    setSubmenuOpen( !subMenuOpen )
+  const { user } = state
+
+  function menuItemsBuilder ( items ) {
+    return items.map( ( item, index ) => {
+      switch ( item.container ) {
+      case 'collapse':
+        return (
+          <CollapseMenuItem
+            text={item.text}
+            icon={item.icon}
+            subMenuItems={item.subMenuItems}
+          />
+        )
+      case 'divider':
+        return (
+          <Divider
+            aria-orientation="vertical"
+          />
+        )
+      default:
+        return (
+          <ListItem
+            button
+            key={item.text}
+            role="menuitem"
+          >
+            <ListItemIcon>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        )
+      }
+    } )
   }
+
   return (
     <Drawer
       className={classes.drawer}
@@ -94,60 +125,10 @@ export default function SideNav ( props ) {
         role= "menu"
         aria-haspopup="menu"
       >
-        {[ 'Inbox', 'Starred', 'Send email', 'Drafts' ].map( ( text, index ) => (
-          <ListItem
-            button
-            key={text}
-            role="menuitem"
-          >
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon titleAccess="meaning" /> : <MailIcon titleAccess="meaning" />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ) )}
-        <Divider
-          aria-orientation="vertical"
-        />
-        {[ 'All mail', 'Trash', 'Spam' ].map( ( text, index ) => (
-          <ListItem
-            button
-            key={text}
-            role="menuitem"
-          >
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon titleAccess="meaning" /> : <MailIcon titleAccess="meaning" />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ) )}
-        <ListItem
-          button
-          role="menuitem"
-          onClick={handleClick}
-        >
-          <ListItemIcon>
-            <InboxIcon titleAccess="meaning" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-          {subMenuOpen ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse
-          in={subMenuOpen}
-          timeout="auto"
-          unmountOnExit>
-          <List
-            component="div"
-            disablePadding
-          >
-            <ListItem
-              button
-              role="menuitem"
-              aria-hidden={!subMenuOpen}
-              className={classes.nested}>
-              <ListItemIcon>
-                <StarBorder titleAccess="meaning" />
-              </ListItemIcon>
-              <ListItemText primary="Starred" />
-            </ListItem>
-          </List>
-        </Collapse>
+        {user && user.isAdmin
+          ? menuItemsBuilder( props.adminMenuItems )
+          : menuItemsBuilder( props.menuItems )
+        }
       </List>
     </Drawer>
 
@@ -155,6 +136,8 @@ export default function SideNav ( props ) {
 }
 
 SideNav.propTypes = {
-  open: PropTypes.bool.isRequired
+  open: PropTypes.bool.isRequired,
+  adminMenuItems: PropTypes.array,
+  menuItems: PropTypes.array
 }
 
