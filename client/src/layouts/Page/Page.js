@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from '../../components/Header/index';
-import Footer from '../../components/Footer/index';
-import ErrorBoundary from '../../components/ErrorBoundary/index'
-import AlertMessage from '../../components/AlertMessage/index';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary'
+import AlertMessage from '../../components/AlertMessage/AlertMessage';
 
 export default function Page ( props ) {
 

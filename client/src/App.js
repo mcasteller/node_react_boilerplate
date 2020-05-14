@@ -2,11 +2,11 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 
 import history from './history';
-import Home from './views/Home/index';
-import Page from './layouts/Page/index';
-import Person from './views/Person/index';
+import Home from './views/Home/Home';
+import Page from './layouts/Page/Page';
+import Person from './views/Person/Person';
 import { AppProvider } from './context/AppProvider/store';
-import AuthenticatedContent from './components/AuthenticatedContent/index.js';
+import AuthenticatedContent from './components/AuthenticatedContent/AuthenticatedContent.js';
 
 //const env = process.env.NODE_ENV || 'development';
 

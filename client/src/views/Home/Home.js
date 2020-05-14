@@ -133,7 +133,11 @@ function Home () {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
+                  <Button
+                    fullWidth
+                    variant={tier.buttonVariant}
+                    color="primary"
+                  >
                     {tier.buttonText}
                   </Button>
                 </CardActions>

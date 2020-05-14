@@ -157,6 +157,7 @@ export default function ProfileMenu () {
         aria-haspopup="true"
         color="inherit"
         onClick={handleClick}
+        aria-label="toggle user account menu"
       >
         <AppsIcon />
       </IconButton>
@@ -166,6 +167,8 @@ export default function ProfileMenu () {
         keepMounted
         open={Boolean( anchorEl )}
         onClose={handleClose}
+        aria-label='Account Information'
+        aria-expanded={Boolean( anchorEl )}
       >
         {userProfile()}
         {

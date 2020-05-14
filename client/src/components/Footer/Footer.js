@@ -60,7 +60,7 @@ const useStyles = makeStyles( ( theme ) => ( {
   }
 } ) );
 
-const footers = [
+export const footers = [
   {
     title: 'Company',
     description: [ 'Team', 'History', 'Contact us', 'Locations' ]
