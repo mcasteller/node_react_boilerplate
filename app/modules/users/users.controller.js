@@ -30,7 +30,8 @@ module.exports.getUser = ( req, res, next ) => {
     email: req.user.email,
     displayName: req.user.displayName,
     provider: req.user.provider,
-    roles: req.user.roles
+    roles: req.user.roles,
+    isAdmin: req.user.isAdmin
   }
 
   logger.info( `User Route: authentication successfull for user: ${ JSON.stringify( user ) }` );

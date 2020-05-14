@@ -7,7 +7,7 @@ const mongoose = require( 'mongoose' ),
   path = require( 'path' ),
   config = require( path.resolve( './config/config' ) ),
   Schema = mongoose.Schema;
-
+const _ = require( 'lodash' );
 /**
  * A Validation function for username
  * - at least 3 characters
@@ -101,7 +101,20 @@ const UserSchema = new Schema( {
   resetPasswordExpires: {
     type: Date
   }
+}, {
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 } );
+
+// Virtual Fields
+UserSchema.virtual( 'isAdmin' )
+  .get( function () {
+    return _.includes( this.roles, 'admin' )
+  } )
 
 // /**
 //  * Hook a pre save method to hash the password
