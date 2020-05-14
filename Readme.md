@@ -28,8 +28,30 @@ This is just a boilerplate project to feature some Node and React related techno
   - [Logging](#Logging)
 
 ## Run
-Project is executed using this command over /app folder:
 
+1. Clone repo
+2. generate .env files:
+
+```` javascript
+/app/.env
+API_HOST="http://localhost:3100"
+APP_SERVER_PORT=3100
+REACT_APP_PORT=80
+NODE_ENV=development
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+SERVER_API_URL=http://localhost:3100/api
+SENTRY_DSN=...
+ADMIN_EMAIL=example@gmail.com
+
+/client/.env
+REACT_APP_SENTRY_DSN=...
+````
+2. execute 'yarn' under /app and /client folders
+
+3. run yarn build from inside /app folder to build client files and send them into /app/public folder
+
+4. Execute Docker
 $ docker-compose up --build
 or
 $ docker-compose -f ./docker-compose.yml up --build
