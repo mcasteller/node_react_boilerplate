@@ -1,5 +1,5 @@
-# Tell Docker we want to use Node v10.4.1 installed in a alpine Linux image
-FROM node:10.13.0-alpine
+# Tell Docker we want to use Node v10.14.2 installed in a alpine Linux image
+FROM node:10.14.2-alpine
 
 # --debug and inspect port
 EXPOSE 5858 9229
