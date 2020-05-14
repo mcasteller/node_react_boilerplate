@@ -1,7 +1,8 @@
 module.exports = {
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:jsx-a11y/recommended'
   ],
   globals: {
     shallow: true,
@@ -9,8 +10,12 @@ module.exports = {
     mount: true,
     nock: true
   },
+  env: {
+    "jest": true
+  },
   plugins: [
-    'react'
+    'react',
+    'jsx-a11y'
   ],
   rules: {
     'no-unused-vars': ['error', { vars: 'all', args: 'none' }], // prevent lint errors if you don't use some function arguments

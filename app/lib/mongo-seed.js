@@ -12,7 +12,7 @@ function start () {
       name: 'Admin',
       description: 'Admin have access to all restricted paths',
       userEmails: [
-        'castellerm@gmail.com'
+        process.env.ADMIN_EMAIL
       ]
     }
   ]
